@@ -1,0 +1,55 @@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+<div style="text-align:center">
+  <h1>{{ title }}</h1>
+
+  <button class="btn btn-primary btn-sm" (click)="show=!show">{{ show ? 'Hide Form' : 'New Author' }}</button>
+
+  <div class="addAuthor" *ngIf="show">
+      <p>Submit New Author</p>
+      <div class="myForm">
+          
+        <span class="green" *ngIf="authorMessage.status !='Error'">{{ authorMessage.status }}</span>
+        
+        <form (submit)="postAuthor()">
+                     
+            
+            <input type="text" class="form-control" name="newAuthor.name" [(ngModel)]="newAuthor.name" placeholder="name">
+        
+          <button type="submit" >Submit</button>
+        </form>
+      </div>
+  </div>
+
+  <h3 style="text-align:left; color: purple">We have quotes by: </h3>
+  <div class="tableDiv">
+    <table style="width:50%" class="table table-bordered table-dark table-sm">
+      <thead>
+        <tr>
+          <th class="w-25">#</th>
+          <th class="w-25">ID</th>
+          <th class="w-25">Author</th>
+          <th class="w-25">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let author of authors; let i=index">
+          <th scope="row">{{ (i+1) }}</th>
+          <td>{{ author._id }}</td>
+          <td>{{ author.name }}</td>
+          <td>
+            <button type="button" class="btn btn-sm btn-info" (click)="putAuthor(author)">edit</button>
+            <button type="button" class="btn btn-sm btn-danger" (click)="destroyAuthor(author._id)">delete</button>
+          </td>
+
+        </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+<app-edit-author *ngIf="selectedAuthor" [author]='selectAuthor'></app-edit-author>

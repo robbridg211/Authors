@@ -1,0 +1,13 @@
+<div class="edit-author">
+  <p>Edit Author</p>
+  <div class="myForm">
+
+    <form (submit)="putAuthor(author)">
+      <div>
+        <input type="text" class="form-control" name="name" [(ngModel)]="author.name">
+      </div>
+    
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
